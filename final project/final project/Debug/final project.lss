@@ -1,0 +1,768 @@
+
+final project.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003ca  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000012  00800060  000003ca  0000043e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000450  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000480  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000c8  00000000  00000000  000004bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000115e  00000000  00000000  00000584  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000851  00000000  00000000  000016e2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000095f  00000000  00000000  00001f33  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000174  00000000  00000000  00002894  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000070c  00000000  00000000  00002a08  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000064d  00000000  00000000  00003114  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000098  00000000  00000000  00003761  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea ec       	ldi	r30, 0xCA	; 202
+  68:	f3 e0       	ldi	r31, 0x03	; 3
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a2 37       	cpi	r26, 0x72	; 114
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 e3 01 	jmp	0x3c6	; 0x3c6 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+	 Ultrasonic_init(us_left);
+	 Ultrasonic_init(us_right);
+}
+int main(void)
+{
+	motor_init();
+  82:	0e 94 56 00 	call	0xac	; 0xac <motor_init>
+  86:	ff cf       	rjmp	.-2      	; 0x86 <main+0x4>
+
+00000088 <motor_dir_pins_inti>:
+
+
+/*Helper : set direction output pins as outputs */
+static void motor_dir_pins_inti(void)
+{
+	DDRD |= (1<<IN1_PIN) |(1<<IN2_PIN) |(1<<IN3_PIN) |(1<<IN4_PIN);
+  88:	81 b3       	in	r24, 0x11	; 17
+  8a:	8c 6c       	ori	r24, 0xCC	; 204
+  8c:	81 bb       	out	0x11, r24	; 17
+  8e:	08 95       	ret
+
+00000090 <motor_set_speed>:
+	 /* clear direction outputs */
+	 PORTD &= ~((1<<IN1_PIN)|(1<<IN2_PIN)|(1<<IN3_PIN)|(1<<IN4_PIN));
+}
+
+void motor_set_speed(uint8_t left_spd, uint8_t right_spd)
+{
+  90:	cf 93       	push	r28
+  92:	c8 2f       	mov	r28, r24
+  94:	46 2f       	mov	r20, r22
+	TIMER_setDutyRaw(TIMER_ID_1,TIMER_CH_A,right_spd);
+  96:	60 e0       	ldi	r22, 0x00	; 0
+  98:	81 e0       	ldi	r24, 0x01	; 1
+  9a:	0e 94 9d 00 	call	0x13a	; 0x13a <TIMER_setDutyRaw>
+	TIMER_setDutyRaw(TIMER_ID_1,TIMER_CH_B,left_spd);
+  9e:	4c 2f       	mov	r20, r28
+  a0:	61 e0       	ldi	r22, 0x01	; 1
+  a2:	81 e0       	ldi	r24, 0x01	; 1
+  a4:	0e 94 9d 00 	call	0x13a	; 0x13a <TIMER_setDutyRaw>
+}
+  a8:	cf 91       	pop	r28
+  aa:	08 95       	ret
+
+000000ac <motor_init>:
+{
+	DDRD |= (1<<IN1_PIN) |(1<<IN2_PIN) |(1<<IN3_PIN) |(1<<IN4_PIN);
+}
+
+void motor_init()
+{
+  ac:	cf 93       	push	r28
+  ae:	df 93       	push	r29
+  b0:	cd b7       	in	r28, 0x3d	; 61
+  b2:	de b7       	in	r29, 0x3e	; 62
+  b4:	61 97       	sbiw	r28, 0x11	; 17
+  b6:	0f b6       	in	r0, 0x3f	; 63
+  b8:	f8 94       	cli
+  ba:	de bf       	out	0x3e, r29	; 62
+  bc:	0f be       	out	0x3f, r0	; 63
+  be:	cd bf       	out	0x3d, r28	; 61
+	//timer1 configuration for fast pwm
+	TIMER_Config_t t1_cfg={
+  c0:	81 e1       	ldi	r24, 0x11	; 17
+  c2:	e0 e6       	ldi	r30, 0x60	; 96
+  c4:	f0 e0       	ldi	r31, 0x00	; 0
+  c6:	de 01       	movw	r26, r28
+  c8:	11 96       	adiw	r26, 0x01	; 1
+  ca:	01 90       	ld	r0, Z+
+  cc:	0d 92       	st	X+, r0
+  ce:	8a 95       	dec	r24
+  d0:	e1 f7       	brne	.-8      	; 0xca <motor_init+0x1e>
+		.int_ovf_enable=0,
+		.int_ocA_enable=0,
+		.int_ocB_enable=0,
+		.configure_oc_pins=1		  // Set OC1A/OC1B pins as outputs
+	};
+	TIMER_init(&t1_cfg);
+  d2:	ce 01       	movw	r24, r28
+  d4:	01 96       	adiw	r24, 0x01	; 1
+  d6:	0e 94 f9 00 	call	0x1f2	; 0x1f2 <TIMER_init>
+	
+	
+	/*motor pins direction*/
+	motor_dir_pins_inti();
+  da:	0e 94 44 00 	call	0x88	; 0x88 <motor_dir_pins_inti>
+	
+	motor_set_speed(0,0);
+  de:	60 e0       	ldi	r22, 0x00	; 0
+  e0:	80 e0       	ldi	r24, 0x00	; 0
+  e2:	0e 94 48 00 	call	0x90	; 0x90 <motor_set_speed>
+	
+	 /* clear direction outputs */
+	 PORTD &= ~((1<<IN1_PIN)|(1<<IN2_PIN)|(1<<IN3_PIN)|(1<<IN4_PIN));
+  e6:	82 b3       	in	r24, 0x12	; 18
+  e8:	83 73       	andi	r24, 0x33	; 51
+  ea:	82 bb       	out	0x12, r24	; 18
+}
+  ec:	61 96       	adiw	r28, 0x11	; 17
+  ee:	0f b6       	in	r0, 0x3f	; 63
+  f0:	f8 94       	cli
+  f2:	de bf       	out	0x3e, r29	; 62
+  f4:	0f be       	out	0x3f, r0	; 63
+  f6:	cd bf       	out	0x3d, r28	; 61
+  f8:	df 91       	pop	r29
+  fa:	cf 91       	pop	r28
+  fc:	08 95       	ret
+
+000000fe <TIMER_start>:
+    switch (id) {
+    case TIMER_ID_0: (void)ch; OCR0 = (uint8_t)value; break;
+    case TIMER_ID_1:
+        if (ch == TIMER_CH_A) OCR1A = value; else OCR1B = value;
+        break;
+    case TIMER_ID_2: (void)ch; OCR2 = (uint8_t)value; break;
+  fe:	81 30       	cpi	r24, 0x01	; 1
+ 100:	61 f0       	breq	.+24     	; 0x11a <TIMER_start+0x1c>
+ 102:	18 f0       	brcs	.+6      	; 0x10a <TIMER_start+0xc>
+ 104:	82 30       	cpi	r24, 0x02	; 2
+ 106:	89 f0       	breq	.+34     	; 0x12a <TIMER_start+0x2c>
+ 108:	08 95       	ret
+ 10a:	83 b7       	in	r24, 0x33	; 51
+ 10c:	88 7f       	andi	r24, 0xF8	; 248
+ 10e:	83 bf       	out	0x33, r24	; 51
+ 110:	83 b7       	in	r24, 0x33	; 51
+ 112:	67 70       	andi	r22, 0x07	; 7
+ 114:	68 2b       	or	r22, r24
+ 116:	63 bf       	out	0x33, r22	; 51
+ 118:	08 95       	ret
+ 11a:	8e b5       	in	r24, 0x2e	; 46
+ 11c:	88 7f       	andi	r24, 0xF8	; 248
+ 11e:	8e bd       	out	0x2e, r24	; 46
+ 120:	8e b5       	in	r24, 0x2e	; 46
+ 122:	67 70       	andi	r22, 0x07	; 7
+ 124:	68 2b       	or	r22, r24
+ 126:	6e bd       	out	0x2e, r22	; 46
+ 128:	08 95       	ret
+ 12a:	85 b5       	in	r24, 0x25	; 37
+ 12c:	88 7f       	andi	r24, 0xF8	; 248
+ 12e:	85 bd       	out	0x25, r24	; 37
+ 130:	85 b5       	in	r24, 0x25	; 37
+ 132:	67 70       	andi	r22, 0x07	; 7
+ 134:	68 2b       	or	r22, r24
+ 136:	65 bd       	out	0x25, r22	; 37
+ 138:	08 95       	ret
+
+0000013a <TIMER_setDutyRaw>:
+
+void TIMER_setDutyRaw(TIMER_ID_t id, TIMER_Channel_t ch, uint8_t duty_0_255)
+{
+    /* For 8-bit Fast/Phase PWM, OCRx = duty directly.
+       For Timer1 here (8-bit PWM mode), we still use 8-bit duty mapped into OCR1x[7:0]. */
+    switch (id) {
+ 13a:	81 30       	cpi	r24, 0x01	; 1
+ 13c:	31 f0       	breq	.+12     	; 0x14a <TIMER_setDutyRaw+0x10>
+ 13e:	18 f0       	brcs	.+6      	; 0x146 <TIMER_setDutyRaw+0xc>
+ 140:	82 30       	cpi	r24, 0x02	; 2
+ 142:	69 f0       	breq	.+26     	; 0x15e <TIMER_setDutyRaw+0x24>
+ 144:	08 95       	ret
+    case TIMER_ID_0: (void)ch; OCR0 = duty_0_255; break;
+ 146:	4c bf       	out	0x3c, r20	; 60
+ 148:	08 95       	ret
+    case TIMER_ID_1:
+        if (ch == TIMER_CH_A) {
+ 14a:	61 11       	cpse	r22, r1
+ 14c:	04 c0       	rjmp	.+8      	; 0x156 <TIMER_setDutyRaw+0x1c>
+            OCR1A = duty_0_255;  // In 8-bit PWM modes, lower 8 bits are used
+ 14e:	50 e0       	ldi	r21, 0x00	; 0
+ 150:	5b bd       	out	0x2b, r21	; 43
+ 152:	4a bd       	out	0x2a, r20	; 42
+ 154:	08 95       	ret
+        } else {
+            OCR1B = duty_0_255;
+ 156:	50 e0       	ldi	r21, 0x00	; 0
+ 158:	59 bd       	out	0x29, r21	; 41
+ 15a:	48 bd       	out	0x28, r20	; 40
+ 15c:	08 95       	ret
+        }
+        break;
+    case TIMER_ID_2: (void)ch; OCR2 = duty_0_255; break;
+ 15e:	43 bd       	out	0x23, r20	; 35
+ 160:	08 95       	ret
+
+00000162 <TIMER_enableInterrupts>:
+    }
+}
+
+void TIMER_enableInterrupts(TIMER_ID_t id, uint8_t en_ovf, uint8_t en_ocA, uint8_t en_ocB)
+{
+    switch (id) {
+ 162:	81 30       	cpi	r24, 0x01	; 1
+ 164:	b9 f0       	breq	.+46     	; 0x194 <TIMER_enableInterrupts+0x32>
+ 166:	18 f0       	brcs	.+6      	; 0x16e <TIMER_enableInterrupts+0xc>
+ 168:	82 30       	cpi	r24, 0x02	; 2
+ 16a:	81 f1       	breq	.+96     	; 0x1cc <TIMER_enableInterrupts+0x6a>
+ 16c:	08 95       	ret
+    case TIMER_ID_0:
+        if (en_ovf) TIMSK |= (1<<TOIE0); else TIMSK &= ~(1<<TOIE0);
+ 16e:	66 23       	and	r22, r22
+ 170:	21 f0       	breq	.+8      	; 0x17a <TIMER_enableInterrupts+0x18>
+ 172:	89 b7       	in	r24, 0x39	; 57
+ 174:	81 60       	ori	r24, 0x01	; 1
+ 176:	89 bf       	out	0x39, r24	; 57
+ 178:	03 c0       	rjmp	.+6      	; 0x180 <TIMER_enableInterrupts+0x1e>
+ 17a:	89 b7       	in	r24, 0x39	; 57
+ 17c:	8e 7f       	andi	r24, 0xFE	; 254
+ 17e:	89 bf       	out	0x39, r24	; 57
+        if (en_ocA) TIMSK |= (1<<OCIE0); else TIMSK &= ~(1<<OCIE0);
+ 180:	44 23       	and	r20, r20
+ 182:	21 f0       	breq	.+8      	; 0x18c <TIMER_enableInterrupts+0x2a>
+ 184:	89 b7       	in	r24, 0x39	; 57
+ 186:	82 60       	ori	r24, 0x02	; 2
+ 188:	89 bf       	out	0x39, r24	; 57
+ 18a:	08 95       	ret
+ 18c:	89 b7       	in	r24, 0x39	; 57
+ 18e:	8d 7f       	andi	r24, 0xFD	; 253
+ 190:	89 bf       	out	0x39, r24	; 57
+ 192:	08 95       	ret
+        break;
+    case TIMER_ID_1:
+        if (en_ovf) TIMSK |= (1<<TOIE1); else TIMSK &= ~(1<<TOIE1);
+ 194:	66 23       	and	r22, r22
+ 196:	21 f0       	breq	.+8      	; 0x1a0 <TIMER_enableInterrupts+0x3e>
+ 198:	89 b7       	in	r24, 0x39	; 57
+ 19a:	84 60       	ori	r24, 0x04	; 4
+ 19c:	89 bf       	out	0x39, r24	; 57
+ 19e:	03 c0       	rjmp	.+6      	; 0x1a6 <TIMER_enableInterrupts+0x44>
+ 1a0:	89 b7       	in	r24, 0x39	; 57
+ 1a2:	8b 7f       	andi	r24, 0xFB	; 251
+ 1a4:	89 bf       	out	0x39, r24	; 57
+        if (en_ocA) TIMSK |= (1<<OCIE1A); else TIMSK &= ~(1<<OCIE1A);
+ 1a6:	44 23       	and	r20, r20
+ 1a8:	21 f0       	breq	.+8      	; 0x1b2 <TIMER_enableInterrupts+0x50>
+ 1aa:	89 b7       	in	r24, 0x39	; 57
+ 1ac:	80 61       	ori	r24, 0x10	; 16
+ 1ae:	89 bf       	out	0x39, r24	; 57
+ 1b0:	03 c0       	rjmp	.+6      	; 0x1b8 <TIMER_enableInterrupts+0x56>
+ 1b2:	89 b7       	in	r24, 0x39	; 57
+ 1b4:	8f 7e       	andi	r24, 0xEF	; 239
+ 1b6:	89 bf       	out	0x39, r24	; 57
+        if (en_ocB) TIMSK |= (1<<OCIE1B); else TIMSK &= ~(1<<OCIE1B);
+ 1b8:	22 23       	and	r18, r18
+ 1ba:	21 f0       	breq	.+8      	; 0x1c4 <TIMER_enableInterrupts+0x62>
+ 1bc:	89 b7       	in	r24, 0x39	; 57
+ 1be:	88 60       	ori	r24, 0x08	; 8
+ 1c0:	89 bf       	out	0x39, r24	; 57
+ 1c2:	08 95       	ret
+ 1c4:	89 b7       	in	r24, 0x39	; 57
+ 1c6:	87 7f       	andi	r24, 0xF7	; 247
+ 1c8:	89 bf       	out	0x39, r24	; 57
+ 1ca:	08 95       	ret
+        break;
+    case TIMER_ID_2:
+        if (en_ovf) TIMSK |= (1<<TOIE2); else TIMSK &= ~(1<<TOIE2);
+ 1cc:	66 23       	and	r22, r22
+ 1ce:	21 f0       	breq	.+8      	; 0x1d8 <TIMER_enableInterrupts+0x76>
+ 1d0:	89 b7       	in	r24, 0x39	; 57
+ 1d2:	80 64       	ori	r24, 0x40	; 64
+ 1d4:	89 bf       	out	0x39, r24	; 57
+ 1d6:	03 c0       	rjmp	.+6      	; 0x1de <TIMER_enableInterrupts+0x7c>
+ 1d8:	89 b7       	in	r24, 0x39	; 57
+ 1da:	8f 7b       	andi	r24, 0xBF	; 191
+ 1dc:	89 bf       	out	0x39, r24	; 57
+        if (en_ocA) TIMSK |= (1<<OCIE2); else TIMSK &= ~(1<<OCIE2);
+ 1de:	44 23       	and	r20, r20
+ 1e0:	21 f0       	breq	.+8      	; 0x1ea <TIMER_enableInterrupts+0x88>
+ 1e2:	89 b7       	in	r24, 0x39	; 57
+ 1e4:	80 68       	ori	r24, 0x80	; 128
+ 1e6:	89 bf       	out	0x39, r24	; 57
+ 1e8:	08 95       	ret
+ 1ea:	89 b7       	in	r24, 0x39	; 57
+ 1ec:	8f 77       	andi	r24, 0x7F	; 127
+ 1ee:	89 bf       	out	0x39, r24	; 57
+ 1f0:	08 95       	ret
+
+000001f2 <TIMER_init>:
+}
+
+/* ===== API Implementation ===== */
+
+void TIMER_init(const TIMER_Config_t *cfg)
+{
+ 1f2:	cf 93       	push	r28
+ 1f4:	df 93       	push	r29
+    if (!cfg) return;
+ 1f6:	00 97       	sbiw	r24, 0x00	; 0
+ 1f8:	09 f4       	brne	.+2      	; 0x1fc <TIMER_init+0xa>
+ 1fa:	e2 c0       	rjmp	.+452    	; 0x3c0 <TIMER_init+0x1ce>
+ 1fc:	ec 01       	movw	r28, r24
+
+    switch (cfg->id) {
+ 1fe:	88 81       	ld	r24, Y
+ 200:	81 30       	cpi	r24, 0x01	; 1
+ 202:	09 f4       	brne	.+2      	; 0x206 <TIMER_init+0x14>
+ 204:	41 c0       	rjmp	.+130    	; 0x288 <TIMER_init+0x96>
+ 206:	20 f0       	brcs	.+8      	; 0x210 <TIMER_init+0x1e>
+ 208:	82 30       	cpi	r24, 0x02	; 2
+ 20a:	09 f4       	brne	.+2      	; 0x20e <TIMER_init+0x1c>
+ 20c:	9e c0       	rjmp	.+316    	; 0x34a <TIMER_init+0x158>
+ 20e:	d8 c0       	rjmp	.+432    	; 0x3c0 <TIMER_init+0x1ce>
+    case TIMER_ID_0:
+        /* Mode */
+        _t0_apply_mode(cfg->mode);
+ 210:	99 81       	ldd	r25, Y+1	; 0x01
+
+/* ===== Internal helpers: apply modes / OC modes per timer ===== */
+
+static inline void _t0_apply_mode(TIMER_Mode_t mode) {
+    /* Clear WGM01:0 */
+    TCCR0 &= ~((1<<WGM00) | (1<<WGM01));
+ 212:	83 b7       	in	r24, 0x33	; 51
+ 214:	87 7b       	andi	r24, 0xB7	; 183
+ 216:	83 bf       	out	0x33, r24	; 51
+    switch (mode) {
+ 218:	92 30       	cpi	r25, 0x02	; 2
+ 21a:	29 f0       	breq	.+10     	; 0x226 <TIMER_init+0x34>
+ 21c:	93 30       	cpi	r25, 0x03	; 3
+ 21e:	39 f0       	breq	.+14     	; 0x22e <TIMER_init+0x3c>
+ 220:	91 30       	cpi	r25, 0x01	; 1
+ 222:	61 f4       	brne	.+24     	; 0x23c <TIMER_init+0x4a>
+ 224:	08 c0       	rjmp	.+16     	; 0x236 <TIMER_init+0x44>
+        case TIMER_MODE_NORMAL: /* 00 */ break;
+        case TIMER_MODE_CTC:    TCCR0 |= (1<<WGM01); break;                /* 10 */
+ 226:	83 b7       	in	r24, 0x33	; 51
+ 228:	88 60       	ori	r24, 0x08	; 8
+ 22a:	83 bf       	out	0x33, r24	; 51
+ 22c:	07 c0       	rjmp	.+14     	; 0x23c <TIMER_init+0x4a>
+        case TIMER_MODE_FAST_PWM: TCCR0 |= (1<<WGM00) | (1<<WGM01); break; /* 11 */
+ 22e:	83 b7       	in	r24, 0x33	; 51
+ 230:	88 64       	ori	r24, 0x48	; 72
+ 232:	83 bf       	out	0x33, r24	; 51
+ 234:	03 c0       	rjmp	.+6      	; 0x23c <TIMER_init+0x4a>
+        case TIMER_MODE_PHASE_PWM: TCCR0 |= (1<<WGM00); break;             /* 01 */
+ 236:	83 b7       	in	r24, 0x33	; 51
+ 238:	80 64       	ori	r24, 0x40	; 64
+ 23a:	83 bf       	out	0x33, r24	; 51
+    case TIMER_ID_0:
+        /* Mode */
+        _t0_apply_mode(cfg->mode);
+
+        /* OC0 direction (optional) */
+        if (cfg->configure_oc_pins && (cfg->oc_mode_A != TIMER_OC_DISCONNECTED)) {
+ 23c:	88 89       	ldd	r24, Y+16	; 0x10
+ 23e:	88 23       	and	r24, r24
+ 240:	31 f0       	breq	.+12     	; 0x24e <TIMER_init+0x5c>
+ 242:	8b 81       	ldd	r24, Y+3	; 0x03
+ 244:	88 23       	and	r24, r24
+ 246:	19 f0       	breq	.+6      	; 0x24e <TIMER_init+0x5c>
+            OC0_DDR |= (1<<OC0_PIN);
+ 248:	87 b3       	in	r24, 0x17	; 23
+ 24a:	88 60       	ori	r24, 0x08	; 8
+ 24c:	87 bb       	out	0x17, r24	; 23
+        }
+
+        /* OC0 mode */
+        _t0_apply_ocA(cfg->oc_mode_A);
+ 24e:	9b 81       	ldd	r25, Y+3	; 0x03
+            break;
+    }
+}
+
+static inline void _t0_apply_ocA(TIMER_OCMode_t mode) {
+    TCCR0 &= ~((1<<COM01) | (1<<COM00));
+ 250:	83 b7       	in	r24, 0x33	; 51
+ 252:	8f 7c       	andi	r24, 0xCF	; 207
+ 254:	83 bf       	out	0x33, r24	; 51
+    if (mode & 0x02) TCCR0 |= (1<<COM01);
+ 256:	91 ff       	sbrs	r25, 1
+ 258:	03 c0       	rjmp	.+6      	; 0x260 <TIMER_init+0x6e>
+ 25a:	83 b7       	in	r24, 0x33	; 51
+ 25c:	80 62       	ori	r24, 0x20	; 32
+ 25e:	83 bf       	out	0x33, r24	; 51
+    if (mode & 0x01) TCCR0 |= (1<<COM00);
+ 260:	90 ff       	sbrs	r25, 0
+ 262:	03 c0       	rjmp	.+6      	; 0x26a <TIMER_init+0x78>
+ 264:	83 b7       	in	r24, 0x33	; 51
+ 266:	80 61       	ori	r24, 0x10	; 16
+ 268:	83 bf       	out	0x33, r24	; 51
+
+        /* OC0 mode */
+        _t0_apply_ocA(cfg->oc_mode_A);
+
+        /* preload counter/compare (8-bit) */
+        TCNT0 = (uint8_t)(cfg->tcnt_init & 0xFF);
+ 26a:	8d 81       	ldd	r24, Y+5	; 0x05
+ 26c:	82 bf       	out	0x32, r24	; 50
+        OCR0  = (uint8_t)(cfg->ocrA_init & 0xFF);
+ 26e:	8f 81       	ldd	r24, Y+7	; 0x07
+ 270:	8c bf       	out	0x3c, r24	; 60
+
+        /* interrupts */
+        TIMER_enableInterrupts(TIMER_ID_0, cfg->int_ovf_enable, cfg->int_ocA_enable, 0);
+ 272:	20 e0       	ldi	r18, 0x00	; 0
+ 274:	4e 85       	ldd	r20, Y+14	; 0x0e
+ 276:	6d 85       	ldd	r22, Y+13	; 0x0d
+ 278:	80 e0       	ldi	r24, 0x00	; 0
+ 27a:	0e 94 b1 00 	call	0x162	; 0x162 <TIMER_enableInterrupts>
+
+        /* clock */
+        TIMER_start(TIMER_ID_0, cfg->clock_sel);
+ 27e:	6a 81       	ldd	r22, Y+2	; 0x02
+ 280:	80 e0       	ldi	r24, 0x00	; 0
+ 282:	0e 94 7f 00 	call	0xfe	; 0xfe <TIMER_start>
+        break;
+ 286:	9c c0       	rjmp	.+312    	; 0x3c0 <TIMER_init+0x1ce>
+
+    case TIMER_ID_1:
+        _t1_apply_mode(cfg->mode);
+ 288:	99 81       	ldd	r25, Y+1	; 0x01
+}
+
+/* For Timer1 we support: NORMAL, CTC (OCR1A top), FAST_PWM 8-bit, PHASE_PWM 8-bit */
+static inline void _t1_apply_mode(TIMER_Mode_t mode) {
+    /* Clear WGM13..0 */
+    TCCR1A &= ~((1<<WGM10) | (1<<WGM11));
+ 28a:	8f b5       	in	r24, 0x2f	; 47
+ 28c:	8c 7f       	andi	r24, 0xFC	; 252
+ 28e:	8f bd       	out	0x2f, r24	; 47
+    TCCR1B &= ~((1<<WGM12) | (1<<WGM13));
+ 290:	8e b5       	in	r24, 0x2e	; 46
+ 292:	87 7e       	andi	r24, 0xE7	; 231
+ 294:	8e bd       	out	0x2e, r24	; 46
+
+    switch (mode) {
+ 296:	92 30       	cpi	r25, 0x02	; 2
+ 298:	29 f0       	breq	.+10     	; 0x2a4 <TIMER_init+0xb2>
+ 29a:	93 30       	cpi	r25, 0x03	; 3
+ 29c:	39 f0       	breq	.+14     	; 0x2ac <TIMER_init+0xba>
+ 29e:	91 30       	cpi	r25, 0x01	; 1
+ 2a0:	79 f4       	brne	.+30     	; 0x2c0 <TIMER_init+0xce>
+ 2a2:	0b c0       	rjmp	.+22     	; 0x2ba <TIMER_init+0xc8>
+        case TIMER_MODE_NORMAL: /* 0000 */ break;
+        case TIMER_MODE_CTC:    /* 0100 */ TCCR1B |= (1<<WGM12); break; // OCR1A as TOP
+ 2a4:	8e b5       	in	r24, 0x2e	; 46
+ 2a6:	88 60       	ori	r24, 0x08	; 8
+ 2a8:	8e bd       	out	0x2e, r24	; 46
+ 2aa:	0a c0       	rjmp	.+20     	; 0x2c0 <TIMER_init+0xce>
+        case TIMER_MODE_FAST_PWM:
+            /* Fast PWM 8-bit: WGM13..0 = 0101 (WGM12=1, WGM10=1) */
+            TCCR1B |= (1<<WGM12);
+ 2ac:	8e b5       	in	r24, 0x2e	; 46
+ 2ae:	88 60       	ori	r24, 0x08	; 8
+ 2b0:	8e bd       	out	0x2e, r24	; 46
+            TCCR1A |= (1<<WGM10);
+ 2b2:	8f b5       	in	r24, 0x2f	; 47
+ 2b4:	81 60       	ori	r24, 0x01	; 1
+ 2b6:	8f bd       	out	0x2f, r24	; 47
+ 2b8:	03 c0       	rjmp	.+6      	; 0x2c0 <TIMER_init+0xce>
+            break;
+        case TIMER_MODE_PHASE_PWM:
+            /* Phase Correct PWM 8-bit: WGM13..0 = 0001 (WGM10=1) */
+            TCCR1A |= (1<<WGM10);
+ 2ba:	8f b5       	in	r24, 0x2f	; 47
+ 2bc:	81 60       	ori	r24, 0x01	; 1
+ 2be:	8f bd       	out	0x2f, r24	; 47
+
+    case TIMER_ID_1:
+        _t1_apply_mode(cfg->mode);
+
+        /* OC1A/OC1B directions (optional) */
+        if (cfg->configure_oc_pins && (cfg->oc_mode_A != TIMER_OC_DISCONNECTED)) {
+ 2c0:	88 89       	ldd	r24, Y+16	; 0x10
+ 2c2:	88 23       	and	r24, r24
+ 2c4:	31 f0       	breq	.+12     	; 0x2d2 <TIMER_init+0xe0>
+ 2c6:	8b 81       	ldd	r24, Y+3	; 0x03
+ 2c8:	88 23       	and	r24, r24
+ 2ca:	19 f0       	breq	.+6      	; 0x2d2 <TIMER_init+0xe0>
+            OC1A_DDR |= (1<<OC1A_PIN);
+ 2cc:	81 b3       	in	r24, 0x11	; 17
+ 2ce:	80 62       	ori	r24, 0x20	; 32
+ 2d0:	81 bb       	out	0x11, r24	; 17
+        }
+        if (cfg->configure_oc_pins && (cfg->oc_mode_B != TIMER_OC_DISCONNECTED)) {
+ 2d2:	88 89       	ldd	r24, Y+16	; 0x10
+ 2d4:	88 23       	and	r24, r24
+ 2d6:	31 f0       	breq	.+12     	; 0x2e4 <TIMER_init+0xf2>
+ 2d8:	8c 81       	ldd	r24, Y+4	; 0x04
+ 2da:	88 23       	and	r24, r24
+ 2dc:	19 f0       	breq	.+6      	; 0x2e4 <TIMER_init+0xf2>
+            OC1B_DDR |= (1<<OC1B_PIN);
+ 2de:	81 b3       	in	r24, 0x11	; 17
+ 2e0:	80 61       	ori	r24, 0x10	; 16
+ 2e2:	81 bb       	out	0x11, r24	; 17
+        }
+
+        /* OC modes */
+        _t1_apply_ocA(cfg->oc_mode_A);
+ 2e4:	9b 81       	ldd	r25, Y+3	; 0x03
+    if (mode & 0x01) TCCR2 |= (1<<COM20);
+}
+
+/* Timer1 has two channels */
+static inline void _t1_apply_ocA(TIMER_OCMode_t mode) {
+    TCCR1A &= ~((1<<COM1A1) | (1<<COM1A0));
+ 2e6:	8f b5       	in	r24, 0x2f	; 47
+ 2e8:	8f 73       	andi	r24, 0x3F	; 63
+ 2ea:	8f bd       	out	0x2f, r24	; 47
+    if (mode & 0x02) TCCR1A |= (1<<COM1A1);
+ 2ec:	91 ff       	sbrs	r25, 1
+ 2ee:	03 c0       	rjmp	.+6      	; 0x2f6 <TIMER_init+0x104>
+ 2f0:	8f b5       	in	r24, 0x2f	; 47
+ 2f2:	80 68       	ori	r24, 0x80	; 128
+ 2f4:	8f bd       	out	0x2f, r24	; 47
+    if (mode & 0x01) TCCR1A |= (1<<COM1A0);
+ 2f6:	90 ff       	sbrs	r25, 0
+ 2f8:	03 c0       	rjmp	.+6      	; 0x300 <TIMER_init+0x10e>
+ 2fa:	8f b5       	in	r24, 0x2f	; 47
+ 2fc:	80 64       	ori	r24, 0x40	; 64
+ 2fe:	8f bd       	out	0x2f, r24	; 47
+            OC1B_DDR |= (1<<OC1B_PIN);
+        }
+
+        /* OC modes */
+        _t1_apply_ocA(cfg->oc_mode_A);
+        _t1_apply_ocB(cfg->oc_mode_B);
+ 300:	9c 81       	ldd	r25, Y+4	; 0x04
+    TCCR1A &= ~((1<<COM1A1) | (1<<COM1A0));
+    if (mode & 0x02) TCCR1A |= (1<<COM1A1);
+    if (mode & 0x01) TCCR1A |= (1<<COM1A0);
+}
+static inline void _t1_apply_ocB(TIMER_OCMode_t mode) {
+    TCCR1A &= ~((1<<COM1B1) | (1<<COM1B0));
+ 302:	8f b5       	in	r24, 0x2f	; 47
+ 304:	8f 7c       	andi	r24, 0xCF	; 207
+ 306:	8f bd       	out	0x2f, r24	; 47
+    if (mode & 0x02) TCCR1A |= (1<<COM1B1);
+ 308:	91 ff       	sbrs	r25, 1
+ 30a:	03 c0       	rjmp	.+6      	; 0x312 <TIMER_init+0x120>
+ 30c:	8f b5       	in	r24, 0x2f	; 47
+ 30e:	80 62       	ori	r24, 0x20	; 32
+ 310:	8f bd       	out	0x2f, r24	; 47
+    if (mode & 0x01) TCCR1A |= (1<<COM1B0);
+ 312:	90 ff       	sbrs	r25, 0
+ 314:	03 c0       	rjmp	.+6      	; 0x31c <TIMER_init+0x12a>
+ 316:	8f b5       	in	r24, 0x2f	; 47
+ 318:	80 61       	ori	r24, 0x10	; 16
+ 31a:	8f bd       	out	0x2f, r24	; 47
+        /* OC modes */
+        _t1_apply_ocA(cfg->oc_mode_A);
+        _t1_apply_ocB(cfg->oc_mode_B);
+
+        /* preload counter/compare (16-bit) */
+        TCNT1  = cfg->tcnt_init;
+ 31c:	8d 81       	ldd	r24, Y+5	; 0x05
+ 31e:	9e 81       	ldd	r25, Y+6	; 0x06
+ 320:	9d bd       	out	0x2d, r25	; 45
+ 322:	8c bd       	out	0x2c, r24	; 44
+        OCR1A  = cfg->ocrA_init;
+ 324:	8f 81       	ldd	r24, Y+7	; 0x07
+ 326:	98 85       	ldd	r25, Y+8	; 0x08
+ 328:	9b bd       	out	0x2b, r25	; 43
+ 32a:	8a bd       	out	0x2a, r24	; 42
+        OCR1B  = cfg->ocrB_init;
+ 32c:	89 85       	ldd	r24, Y+9	; 0x09
+ 32e:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 330:	99 bd       	out	0x29, r25	; 41
+ 332:	88 bd       	out	0x28, r24	; 40
+        /* ICR1 reserved for advanced modes; not used in this basic set */
+
+        /* interrupts */
+        TIMER_enableInterrupts(TIMER_ID_1, cfg->int_ovf_enable, cfg->int_ocA_enable, cfg->int_ocB_enable);
+ 334:	2f 85       	ldd	r18, Y+15	; 0x0f
+ 336:	4e 85       	ldd	r20, Y+14	; 0x0e
+ 338:	6d 85       	ldd	r22, Y+13	; 0x0d
+ 33a:	81 e0       	ldi	r24, 0x01	; 1
+ 33c:	0e 94 b1 00 	call	0x162	; 0x162 <TIMER_enableInterrupts>
+
+        /* clock */
+        TIMER_start(TIMER_ID_1, cfg->clock_sel);
+ 340:	6a 81       	ldd	r22, Y+2	; 0x02
+ 342:	81 e0       	ldi	r24, 0x01	; 1
+ 344:	0e 94 7f 00 	call	0xfe	; 0xfe <TIMER_start>
+        break;
+ 348:	3b c0       	rjmp	.+118    	; 0x3c0 <TIMER_init+0x1ce>
+
+    case TIMER_ID_2:
+        _t2_apply_mode(cfg->mode);
+ 34a:	99 81       	ldd	r25, Y+1	; 0x01
+        case TIMER_MODE_PHASE_PWM: TCCR0 |= (1<<WGM00); break;             /* 01 */
+    }
+}
+
+static inline void _t2_apply_mode(TIMER_Mode_t mode) {
+    TCCR2 &= ~((1<<WGM20) | (1<<WGM21));
+ 34c:	85 b5       	in	r24, 0x25	; 37
+ 34e:	87 7b       	andi	r24, 0xB7	; 183
+ 350:	85 bd       	out	0x25, r24	; 37
+    switch (mode) {
+ 352:	92 30       	cpi	r25, 0x02	; 2
+ 354:	29 f0       	breq	.+10     	; 0x360 <TIMER_init+0x16e>
+ 356:	93 30       	cpi	r25, 0x03	; 3
+ 358:	39 f0       	breq	.+14     	; 0x368 <TIMER_init+0x176>
+ 35a:	91 30       	cpi	r25, 0x01	; 1
+ 35c:	61 f4       	brne	.+24     	; 0x376 <TIMER_init+0x184>
+ 35e:	08 c0       	rjmp	.+16     	; 0x370 <TIMER_init+0x17e>
+        case TIMER_MODE_NORMAL: /* 00 */ break;
+        case TIMER_MODE_CTC:    TCCR2 |= (1<<WGM21); break;                 /* 10 */
+ 360:	85 b5       	in	r24, 0x25	; 37
+ 362:	88 60       	ori	r24, 0x08	; 8
+ 364:	85 bd       	out	0x25, r24	; 37
+ 366:	07 c0       	rjmp	.+14     	; 0x376 <TIMER_init+0x184>
+        case TIMER_MODE_FAST_PWM: TCCR2 |= (1<<WGM20) | (1<<WGM21); break; /* 11 */
+ 368:	85 b5       	in	r24, 0x25	; 37
+ 36a:	88 64       	ori	r24, 0x48	; 72
+ 36c:	85 bd       	out	0x25, r24	; 37
+ 36e:	03 c0       	rjmp	.+6      	; 0x376 <TIMER_init+0x184>
+        case TIMER_MODE_PHASE_PWM: TCCR2 |= (1<<WGM20); break;              /* 01 */
+ 370:	85 b5       	in	r24, 0x25	; 37
+ 372:	80 64       	ori	r24, 0x40	; 64
+ 374:	85 bd       	out	0x25, r24	; 37
+        break;
+
+    case TIMER_ID_2:
+        _t2_apply_mode(cfg->mode);
+
+        if (cfg->configure_oc_pins && (cfg->oc_mode_A != TIMER_OC_DISCONNECTED)) {
+ 376:	88 89       	ldd	r24, Y+16	; 0x10
+ 378:	88 23       	and	r24, r24
+ 37a:	31 f0       	breq	.+12     	; 0x388 <TIMER_init+0x196>
+ 37c:	8b 81       	ldd	r24, Y+3	; 0x03
+ 37e:	88 23       	and	r24, r24
+ 380:	19 f0       	breq	.+6      	; 0x388 <TIMER_init+0x196>
+            OC2_DDR |= (1<<OC2_PIN);
+ 382:	81 b3       	in	r24, 0x11	; 17
+ 384:	80 68       	ori	r24, 0x80	; 128
+ 386:	81 bb       	out	0x11, r24	; 17
+        }
+
+        _t2_apply_ocA(cfg->oc_mode_A);
+ 388:	9b 81       	ldd	r25, Y+3	; 0x03
+    if (mode & 0x02) TCCR0 |= (1<<COM01);
+    if (mode & 0x01) TCCR0 |= (1<<COM00);
+}
+
+static inline void _t2_apply_ocA(TIMER_OCMode_t mode) {
+    TCCR2 &= ~((1<<COM21) | (1<<COM20));
+ 38a:	85 b5       	in	r24, 0x25	; 37
+ 38c:	8f 7c       	andi	r24, 0xCF	; 207
+ 38e:	85 bd       	out	0x25, r24	; 37
+    if (mode & 0x02) TCCR2 |= (1<<COM21);
+ 390:	91 ff       	sbrs	r25, 1
+ 392:	03 c0       	rjmp	.+6      	; 0x39a <TIMER_init+0x1a8>
+ 394:	85 b5       	in	r24, 0x25	; 37
+ 396:	80 62       	ori	r24, 0x20	; 32
+ 398:	85 bd       	out	0x25, r24	; 37
+    if (mode & 0x01) TCCR2 |= (1<<COM20);
+ 39a:	90 ff       	sbrs	r25, 0
+ 39c:	03 c0       	rjmp	.+6      	; 0x3a4 <TIMER_init+0x1b2>
+ 39e:	85 b5       	in	r24, 0x25	; 37
+ 3a0:	80 61       	ori	r24, 0x10	; 16
+ 3a2:	85 bd       	out	0x25, r24	; 37
+            OC2_DDR |= (1<<OC2_PIN);
+        }
+
+        _t2_apply_ocA(cfg->oc_mode_A);
+
+        TCNT2 = (uint8_t)(cfg->tcnt_init & 0xFF);
+ 3a4:	8d 81       	ldd	r24, Y+5	; 0x05
+ 3a6:	84 bd       	out	0x24, r24	; 36
+        OCR2  = (uint8_t)(cfg->ocrA_init & 0xFF);
+ 3a8:	8f 81       	ldd	r24, Y+7	; 0x07
+ 3aa:	83 bd       	out	0x23, r24	; 35
+
+        TIMER_enableInterrupts(TIMER_ID_2, cfg->int_ovf_enable, cfg->int_ocA_enable, 0);
+ 3ac:	20 e0       	ldi	r18, 0x00	; 0
+ 3ae:	4e 85       	ldd	r20, Y+14	; 0x0e
+ 3b0:	6d 85       	ldd	r22, Y+13	; 0x0d
+ 3b2:	82 e0       	ldi	r24, 0x02	; 2
+ 3b4:	0e 94 b1 00 	call	0x162	; 0x162 <TIMER_enableInterrupts>
+
+        TIMER_start(TIMER_ID_2, cfg->clock_sel);
+ 3b8:	6a 81       	ldd	r22, Y+2	; 0x02
+ 3ba:	82 e0       	ldi	r24, 0x02	; 2
+ 3bc:	0e 94 7f 00 	call	0xfe	; 0xfe <TIMER_start>
+        break;
+    }
+}
+ 3c0:	df 91       	pop	r29
+ 3c2:	cf 91       	pop	r28
+ 3c4:	08 95       	ret
+
+000003c6 <_exit>:
+ 3c6:	f8 94       	cli
+
+000003c8 <__stop_program>:
+ 3c8:	ff cf       	rjmp	.-2      	; 0x3c8 <__stop_program>
