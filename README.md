@@ -89,12 +89,7 @@ Connect hardware as per pin mapping
 Place car on track → watch it navigate autonomously 🚗💨
 ---
 
-## 🗺️ System Flowchart
 
-The following flowchart explains the decision-making process of the car  
-(lane tracking + obstacle avoidance + speed control):
-
-<img width="753" height="943" alt="image" src="https://github.com/user-attachments/assets/fa19edcf-61e0-43a1-b652-674268b646b2" />
 
 
 ---
