@@ -94,7 +94,7 @@ Place car on track → watch it navigate autonomously 🚗💨
 The following flowchart explains the decision-making process of the car  
 (lane tracking + obstacle avoidance + speed control):
 
-<img width="998" height="1498" alt="_- visual selection" src="https://github.com/user-attachments/assets/18375da8-dd8a-4046-925f-54bbe0e1dedd" />
+<img width="998" height="1498" alt="_- visual selection" src="https://github.com/user-attachments/assets/d616dc36-07c8-4714-826f-56e920240270" />
 
 
 ---
