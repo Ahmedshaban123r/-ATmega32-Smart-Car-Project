@@ -30,7 +30,8 @@ typedef enum {
     TIMER_MODE_NORMAL = 0,   // Overflow mode
     TIMER_MODE_PHASE_PWM,    // Phase Correct PWM
     TIMER_MODE_CTC,          // Clear Timer on Compare Match
-    TIMER_MODE_FAST_PWM      // Fast PWM
+    TIMER_MODE_FAST_PWM,	   // Fast PWM
+	TIMER_MODE_FAST_PWM_10BIT // Fast PWM with ICR1 as TOP (10-bit)
 } TIMER_Mode_t;
 
 /* ===================== Compare Output Modes (COM bits) ===================== */
@@ -96,7 +97,7 @@ void     TIMER_setOCMode(TIMER_ID_t id, TIMER_Channel_t ch, TIMER_OCMode_t mode)
 void     TIMER_setCounter(TIMER_ID_t id, uint16_t value);
 uint16_t TIMER_getCounter(TIMER_ID_t id);
 void     TIMER_setCompare(TIMER_ID_t id, TIMER_Channel_t ch, uint16_t value);
-void     TIMER_setDutyRaw(TIMER_ID_t id, TIMER_Channel_t ch, uint8_t duty_0_255);
+void     TIMER_setDutyRaw(TIMER_ID_t id, TIMER_Channel_t ch, uint8_t duty_value);
 void     TIMER_enableInterrupts(TIMER_ID_t id, uint8_t en_ovf, uint8_t en_ocA, uint8_t en_ocB);
 
 #endif /* TIMER_INTERFACE_H_ */
