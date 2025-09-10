@@ -62,15 +62,15 @@ SmartCar_ATmega32/
 
 ### 🔄 State Machine Overview
 
-typedef enum {
+    typedef enum {
     STATE_PROCESS_IR,    // Normal lane following
     STATE_STOP_AVOID,    // Obstacle avoidance
     STATE_SEARCH         // Line search recovery
-} CarState_t;
-#define SPEED_NORMAL 180   // 0-255 scale (converted to 10-bit PWM)
-#define SPEED_SLOW   100   // Slow speed for obstacle proximity
-#define SPEED_AVOID  150   // Avoidance maneuver speed
-#define SPEED_SEARCH 120   // Search pattern speed
+    } CarState_t;
+    #define SPEED_NORMAL 180   // 0-255 scale (converted to 10-bit PWM)
+    #define SPEED_SLOW   100   // Slow speed for obstacle proximity
+    #define SPEED_AVOID  150   // Avoidance maneuver speed
+    #define SPEED_SEARCH 120   // Search pattern speed
 
 
 🚦 State Transitions
@@ -80,7 +80,7 @@ STATE_PROCESS_IR → Normal operation, line detected
 STATE_STOP_AVOID → Obstacle detected < 10cm
 
 STATE_SEARCH → All IR sensors white (line lost)
-
+---
 ⏱️ Timeout protection on all states (5-second maximum).
 
 ⚡ Real-Time Operation
@@ -93,7 +93,7 @@ Ultrasonic sampling: Every 100ms
 State machine updates: Every 50ms
 
 PWM frequency: ~2kHz (16MHz/8/1024)
-
+---
 🎮 Control Behaviors
 
 Lane Following – Proportional control based on IR sensor patterns
@@ -101,7 +101,7 @@ Lane Following – Proportional control based on IR sensor patterns
 Obstacle Avoidance – 8-stage maneuver with backup and turn decisions
 
 Line Recovery – Systematic zigzag search with backup sequence
-
+---
 🚀 Key Features
 ✅ Implemented
 
@@ -116,7 +116,7 @@ Proportional steering control for precise lane tracking
 Multi-stage obstacle avoidance with ultrasonic decision making
 
 Configurable parameters for easy tuning
-
+---
 🔮 Future Enhancements
 
 PID controller for smoother line following
@@ -128,15 +128,15 @@ UART telemetry for debugging and monitoring
 Battery voltage monitoring and low-power modes
 
 Machine learning for improved decision making
-
+---
 📋 Building and Deployment
 🔧 Compilation
 avr-gcc -mmcu=atmega32 -Os -DF_CPU=16000000UL *.c -o smartcar.elf
 avr-objcopy -O ihex smartcar.elf smartcar.hex
-
+---
 ⚡ Flashing
 avrdude -c usbasp -p m32 -U flash:w:smartcar.hex
-
+---
 🧪 Testing
 
 Verify motor directions and IR sensor responses
@@ -146,7 +146,7 @@ Calibrate ultrasonic distances for your environment
 Test on actual track with various obstacle scenarios
 
 Tune parameters (speeds, timeouts, thresholds) as needed
-
+---
 🎓 Educational Value
 
 This project demonstrates mastery of:
