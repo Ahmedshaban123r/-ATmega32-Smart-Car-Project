@@ -61,7 +61,7 @@ SmartCar_ATmega32/
 ## 🎯 Control Logic
 
 ### 🔄 State Machine Overview
-```c
+
 typedef enum {
     STATE_PROCESS_IR,    // Normal lane following
     STATE_STOP_AVOID,    // Obstacle avoidance
@@ -71,7 +71,6 @@ typedef enum {
 #define SPEED_SLOW   100   // Slow speed for obstacle proximity
 #define SPEED_AVOID  150   // Avoidance maneuver speed
 #define SPEED_SEARCH 120   // Search pattern speed
-
 
 
 🚦 State Transitions
@@ -163,4 +162,5 @@ PWM-based motor control techniques
 Sensor integration and data processing
 
 System architecture and modular design
+
 
