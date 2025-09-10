@@ -18,16 +18,15 @@
 
 /* MOTOR DIRECTIONS ENUM */
 typedef enum {
-    FORWARD  = 0x05,   // 0101 -> IN1=1, IN2=0, IN3=1, IN4=0
-    BACKWARD = 0x0A,   // 1010 -> IN1=0, IN2=1, IN3=0, IN4=1
-    RIGHT    = 0x09,   // 1001 -> IN1=1, IN2=0, IN3=0, IN4=1
-    LEFT     = 0x06,   // 0110 -> IN1=0, IN2=1, IN3=1, IN4=0
-    STOP     = 0x00    // 0000
+	FORWARD  = (0<<IN1_PIN) | (1<<IN2_PIN) | (0<<IN3_PIN) | (1<<IN4_PIN),
+	BACKWARD = (1<<IN1_PIN) | (0<<IN2_PIN) | (1<<IN3_PIN) | (0<<IN4_PIN),
+	RIGHT    = (1<<IN1_PIN) | (0<<IN2_PIN) | (0<<IN3_PIN) | (1<<IN4_PIN),
+	LEFT     = (0<<IN1_PIN) | (1<<IN2_PIN) | (1<<IN3_PIN) | (0<<IN4_PIN),
+	STOP     = (0<<IN1_PIN) | (0<<IN2_PIN) | (0<<IN3_PIN) | (0<<IN4_PIN)
 } Motor_Directions;
-
 /* API */
 void motor_init(void);
-/* speeds: 0..255 (8-bit) — because TIMER_setDutyRaw uses 8-bit mapping in your MCAL */
+/* speeds: 0..255 (8-bit) â€” because TIMER_setDutyRaw uses 8-bit mapping in your MCAL */
 void motor_set_speed(uint8_t left_spd, uint8_t right_spd);
 /* direction + speeds */
 void motor_control(Motor_Directions dir, uint8_t left_spd, uint8_t right_spd);
