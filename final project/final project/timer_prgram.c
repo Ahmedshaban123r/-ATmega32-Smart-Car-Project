@@ -26,7 +26,9 @@ static inline void _t2_apply_mode(TIMER_Mode_t mode) {
         case TIMER_MODE_NORMAL: /* 00 */ break;
         case TIMER_MODE_CTC:    TCCR2 |= (1<<WGM21); break;                 /* 10 */
         case TIMER_MODE_FAST_PWM: TCCR2 |= (1<<WGM20) | (1<<WGM21); break; /* 11 */
-        case TIMER_MODE_PHASE_PWM: TCCR2 |= (1<<WGM20); break;              /* 01 */
+        case TIMER_MODE_PHASE_PWM: TCCR2 |= (1<<WGM20); break;
+		
+		
     }
 }
 
@@ -48,6 +50,11 @@ static inline void _t1_apply_mode(TIMER_Mode_t mode) {
             /* Phase Correct PWM 8-bit: WGM13..0 = 0001 (WGM10=1) */
             TCCR1A |= (1<<WGM10);
             break;
+		case TIMER_MODE_FAST_PWM_10BIT : // Fast PWM with ICR1 as TOP (10-bit)            /* 01 */
+			  /* Fast PWM 10-bit: 1110 */
+			  TCCR1A |= (1<<WGM11);
+			  TCCR1B |= (1<<WGM12) | (1<<WGM13);
+			  break;
     }
 }
 
@@ -248,20 +255,31 @@ void TIMER_setCompare(TIMER_ID_t id, TIMER_Channel_t ch, uint16_t value)
     }
 }
 
-void TIMER_setDutyRaw(TIMER_ID_t id, TIMER_Channel_t ch, uint8_t duty_0_255)
+void TIMER_setDutyRaw(TIMER_ID_t id, TIMER_Channel_t ch, uint8_t duty_value)
 {
     /* For 8-bit Fast/Phase PWM, OCRx = duty directly.
        For Timer1 here (8-bit PWM mode), we still use 8-bit duty mapped into OCR1x[7:0]. */
     switch (id) {
-    case TIMER_ID_0: (void)ch; OCR0 = duty_0_255; break;
-    case TIMER_ID_1:
-        if (ch == TIMER_CH_A) {
-            OCR1A = duty_0_255;  // In 8-bit PWM modes, lower 8 bits are used
-        } else {
-            OCR1B = duty_0_255;
-        }
-        break;
-    case TIMER_ID_2: (void)ch; OCR2 = duty_0_255; break;
+    case TIMER_ID_0: (void)ch;   OCR0 = (uint8_t)(duty_value & 0xFF); break;
+     case TIMER_ID_1:
+     if (ch == TIMER_CH_A) {
+	     // Check if we're in 10-bit mode and handle accordingly
+	     if (TCCR1B & (1<<WGM13) && TCCR1B & (1<<WGM12)) {
+		     // 10-bit Fast PWM mode - use full 10-bit value
+		     OCR1A = duty_value;
+		     } else {
+		     // 8-bit mode - use lower 8 bits
+		     OCR1A = duty_value & 0xFF;
+	     }
+	     } else {
+	     if (TCCR1B & (1<<WGM13) && TCCR1B & (1<<WGM12)) {
+		     OCR1B = duty_value;
+		     } else {
+		     OCR1B = duty_value & 0xFF;
+	     }
+     }
+     break;
+    case TIMER_ID_2: (void)ch; OCR2 =   OCR1B = duty_value & 0xFF; break;
     }
 }
 
